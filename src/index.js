@@ -1,148 +1,192 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import myImg from "./images/img1.png";
+import elephant from "./images/elephant.png";
+import gorilla from "./images/gorilla.png";
+import home from "./images/home.png";
+import ice from "./images/ice_cream.png";
 
+const welcome = "Welcome to 30 Days Of React";
+const title = "Getting Started React";
+const subtitle = "JavaScript Library";
+const author = {
+    firstName: "Asabeneh",
+    lastName: "Yetayeh",
+};
+const date = "Oct 3, 2020";
+const Header = () => (
+    <header>
+        <div className="header-wrapper">
+            <h1>{welcome}</h1>
+            <h2>{title}</h2>
+            <h3>{subtitle}</h3>
+            <p>
+                Student: {author.firstName} {author.lastName}
+            </p>
+            <strong>{date}</strong>
+        </div>
+    </header>
+);
+const numOne = 3;
+const numTwo = 2;
 
+const result = (
+    <p>
+        {numOne} + {numTwo} = {numOne + numTwo}
+    </p>
+);
+const yearBorn = 1820;
+const currentYear = 2020;
+const age = currentYear - yearBorn;
+const personAge = (
+    <p>
+        {" "}
+        {author.firstName} {author.lastName} is {age} years old
+    </p>
+);
+const UserCard = () => (
+    <div className="user-card">
+        <img src={myImg} alt="my" />
+        <h2>
+            Author:{author.firstName} {author.lastName}
+        </h2>
+    </div>
+);
 
+const techs = ["HTML", "CSS", "JS"];
+const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>);
 
-//Exercise 1
-// import elephant from "./images/elephant.png";
-// import gorilla from "./images/gorilla.png";
-// import home from "./images/home.png";
-// import iceCreamant from "./images/ice_cream.png";
-// const title = "Front End Technologies";
-// const headerh3Styles = {
-//   display: 'flex',
-//   justifyContent: 'center'
-// }
-// const headerStyles = {
-//   background: 'lightgray'
-// }
-// const header = (
-// 	<header style={headerStyles}>
-// 		<div className="header-wrapper">
-// 			<h3 style={headerh3Styles}>{title}</h3>
-// 		</div>
-// 	</header>
-// )
-// const main = (
-// 	<main style={headerStyles}>
-// 		<div className="main-wrapper">
-// 		<img src={elephant} alt="elephant" />
-//         <img src={gorilla} alt="gorilla" />
-//         <img src={home} alt="home" />
-//         <img src={iceCreamant} alt="iceCreamant" />
-// 		</div>
-// 	</main>
-// )
+const Main = () => (
+    <main>
+        <div className="main-wrapper">
+            <div>
+                <p>
+                    Prerequisite to get started{" "}
+                    <strong>
+                        <em>react.js</em>
+                    </strong>
+                    :
+                </p>
+                <ul>{techsFormatted}</ul>
+                {result}
+                {personAge}
+            </div>
+            <UserCard />
+        </div>
+    </main>
+);
 
-// const app = (
-// 	<div className="app">
-// 		{header}
-// 		{main}
-// 	</div>
-// )
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(app, rootElement);
-//Exercise 1
+const copyRight = "2020";
+const Footer = () => (
+    <footer>
+        <div className="footer-wrapper">
+            <p>Copyright & copy {copyRight}</p>
+        </div>
+    </footer>
+);
 
+const hexaColor = () => {
+    let str = "0123456789abcdef";
+    let color = "";
+    for (let i = 0; i < 6; i++) {
+        let index = Math.floor(Math.random() * str.length);
+        color += str[index];
+    }
+    return "#" + color;
+};
 
-//Exercise2
-// const title = 'SUBSCRIBE'
-// const subTitle = "Sing up with your email address to recive news and updates"
-// const header = (
-  
-//     <div className="header1">
-//       <h2 className="h2">{title}</h2>
-//       <h4>{subTitle}</h4>
+// const HexaColor = () => <div>{hexaColor()}</div>;
+
+// const buttonStyles = {
+//     padding: "10px 20px",
+//     background: "rgb(0, 255, 0",
+//     border: "none",
+//     borderRadius: 5,
+//     cursor: "pointer",
+// };
+
+// const Button = () => <button style={buttonStyles}> action </button>;
+// const Input1 = () => <input></input>;
+
+// const Alert = () => (
+//     <div>
+//         <p>AllClear</p>
 //     </div>
-  
-// )
+// );
+// const cardsStyles = {
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+// };
+// const Card = () => (
+//     <div style={cardsStyles}>
+//         <h3>Technologies</h3>
+//         <div>
+//             <img src={elephant} alt="el" />
+//             <img src={gorilla} alt="gorilla" />
+//             <img src={home} alt="home" />
+//             <img src={ice} alt="ice" />
+//         </div>
+//     </div>
+// );
 
-// const inputs = (
-//   <div className="inputs-wrapper">
-//     <label htmlFor="firstName"></label>
-//     <input className="input" id="firstName" placeholder="First name"></input>
-//     <label htmlFor="lastName"></label>
-//     <input className="input" id="lastName" placeholder="Last Name"></input>
-//     <label htmlFor="email"></label>
-//     <input className="input" id="email" placeholder="Email"></input>
-//   </div>
-// )
 
-// const subscribeButton = (
-//   <div>
-//     <button  className="subscribeButton">Subscribe</button>
-//   </div>
-// )
 
-// const app = (
-//   <div className="container">
-//     {header}
-//     {inputs}
-//     {subscribeButton}
-//   </div>
-// )
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(app, rootElement)
-//Exercise2
-
-// Exercise 3
-import myFoto from './images/img1.png'
-import checked from './images/checked.svg'
-const myInfo =   {
-  firstName: 'Semi',
-  lastName: 'Bryczkowski',
-  country: 'Poland',
-  position: "Junior Developer"
+const cardStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  width: '85%',
+  height: '200px',
+  margin: '20px auto',
+  background: 'lightblue',
+  borderRadius: '10px',
 }
-const myImage = (
-  <div className="myImage">
-    <img className="my-foto"  src={myFoto} alt="my" />
-  </div>
-)
-const myName = (
-  <div className="my-info">
-    <p className="my-name">{myInfo.firstName} {myInfo.lastName} 
-    <img className="checked-svg" src={checked} alt="cheched" /></p>
-  </div>
-)
-const myPosition = (
-  <div className="my-position">
-    <p>{myInfo.position}, {myInfo.country}</p>
-  </div>
 
-)
-const skills = ['HTML','CSS','Sass','JS','React','Resux','Node','MongoDb','Python','Flask','MySQL','Docker','Git']
-
-const skillsLI = skills.map((elem) => <li className="skills-li" key={elem}>{elem}</li>)
-
-const skillsWrapper = (
-  <div>
+const inputStyles = {
+  width: '140px',
+  padding: '7px 5px ',
+  margin: '10px',
+  fontSize: '10px',
+  borderRadius: '5px',
+  border: 'none',
+}
+const buttonStyles ={
+  width: '150px',
+  padding: '5px 10px',
+  background: 'orangered',
+  color: 'white',
+  borderRadius: '5px',
+  border: 'none',
+}
+const SubscribeCard = () => (
+  <div style={cardStyle}>
+    <h3>SUBSCRIBE</h3>
+    <h4>Sing up with your address to receive news and updates.</h4>
     <div>
-      <p className="skills-header">SKILLS</p>
+      <input style={inputStyles} placeholder="First Name"></input>
+      <input style={inputStyles} placeholder="Last Name"></input>
+      <input style={inputStyles} placeholder="Email"></input>
     </div>
-    <ul className="skills-wrapper">{skillsLI}</ul>
+    <button style={buttonStyles}>Subscribe</button>
   </div>
 )
 
 
 
-const footer = (
-  <div className="footer3">
-    <p className="footer-paragraph">🕑 Joined on Aug 30, 2020</p>
-  </div>
-)
 
-  const app = (
-    <div className="container3">
-      {myImage}
-      {myName}
-      {myPosition}
-      {skillsWrapper}
-      {footer}
+
+const App = () => (
+    <div className="app">
+        {/* <Header />
+      <Main />
+      <Footer /> */}
+        <SubscribeCard />
+        {/* <Button /> */}
+        {/* <Input1 /> */}
     </div>
-  )
+);
 
-  const rootElement = document.querySelector('#root')
-  ReactDOM.render(app, rootElement)
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
