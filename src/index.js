@@ -1,72 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// import myImg from "./images/img1.png";
+import elephant from './images/elephant.png'
+import gorilla from './images/gorilla.png'
+import home from './images/home.png'
+import ice from './images/ice_cream.png'
 
-const showDate = (time) => {
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
 
-    const month = months[time.getMonth()].slice(0, 3);
-    const year = time.getFullYear();
-    const date = time.getDate();
-    return ` ${month} ${date}, ${year}`;
-};
-// Header Component
-const Header = ({
-    data: {
-        welcome,
-        title,
-        subtitle,
-        author: { firstName, lastName },
-        date,
-    },
-}) => {
-    return (
-        <header>
-            <div className="header-wrapper">
-                <h1>{welcome}</h1>
-                <h2>{title}</h2>
-                <h3>{subtitle}</h3>
-                <p>
-                    {firstName} {lastName}
-                </p>
-                <small>{showDate(date)}</small>
-            </div>
-        </header>
-    );
-};
-
-// The App, or the parent or the container component
-// Functional Component
+const Main = ({header, images}) => (
+    <main style={mainStyles}>
+        <h3>{header}</h3>
+        <div >
+            <img style={imgStyles} src={images.elephant} alt="1" />
+            <img style={imgStyles}  src={images.gorilla} alt="1" />
+            <img style={imgStyles}  src={images.home} alt="1" />
+            <img style={imgStyles}  src={images.ice} alt="1" />
+        </div>
+    </main>
+)
+const imgStyles = {
+    width: '150px',
+    height: '150px',
+}
+const mainStyles  = {
+    width: '800px',
+    height: '400px',
+    margin: '0 auto',
+    textAlign: 'center'
+}
 const App = () => {
-    const data = {
-        welcome: "Welcome to 30 Days Of React",
-        title: "Getting Started React",
-        subtitle: "JavaScript Library",
-        author: {
-            firstName: "Asabeneh",
-            lastName: "Yetayeh",
-        },
-        date: new Date(),
-    };
-
+    const header = 'Front End Technologies'
+    
+    const images = {elephant: elephant, gorilla: gorilla, home: home, ice: ice}
     return (
         <div className="app">
-            <Header data={data} />
+            <Main 
+                header={header}
+                images={images}
+            />
         </div>
-    );
-};
+    )
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
