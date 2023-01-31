@@ -7,27 +7,106 @@ import home from './images/home.png'
 import ice from './images/ice_cream.png'
 
 
-const Main = ({header, images}) => (
-    <main style={mainStyles}>
-        <h3>{header}</h3>
-        <div >
-            <img style={imgStyles} src={images.elephant} alt="1" />
-            <img style={imgStyles}  src={images.gorilla} alt="1" />
-            <img style={imgStyles}  src={images.home} alt="1" />
-            <img style={imgStyles}  src={images.ice} alt="1" />
-        </div>
-    </main>
+
+const showDate = (time) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
+  const month = months[time.getMonth()].slice(0, 3)
+  const year = time.getFullYear()
+  const date = time.getDate()
+  return ` ${month} ${date}, ${year}`
+}
+
+// Header Component
+const Header = ({
+  data: {
+    welcome,
+    title,
+    subtitle,
+    author: { firstName, lastName },
+    date,
+  },
+}) => {
+  return (
+    <header>
+      <div className='header-wrapper'>
+        <h1>{welcome}</h1>
+        <h2>{title}</h2>
+        <h3>{subtitle}</h3>
+        <p>
+          {firstName} {lastName}
+        </p>
+        <small>{showDate(date)}</small>
+      </div>
+    </header>
+  )
+}
+
+// TechList Component
+const TechList = ({ techs }) => {
+  const techList = techs.map((tech) => <li key={tech}>{tech}</li>)
+  return techList
+}
+
+// User Card Component
+const UserCard = ({ user: { firstName, lastName, image } }) => (
+  <div className='user-card'>
+    <img src={image} alt={firstName} />
+    <h2>
+      {firstName}
+      {lastName}
+    </h2>
+  </div>
 )
-const imgStyles = {
-    width: '150px',
-    height: '150px',
+
+// A button component
+
+const Button = ({ text, onClick, style }) => (
+  <button style={style} onClick={onClick}>
+    {text}
+  </button>
+)
+
+// CSS styles in JavaScript Object
+const buttonStyles = {
+  backgroundColor: '#61dbfb',
+  padding: 10,
+  border: 'none',
+  borderRadius: 5,
+  margin: 3,
+  cursor: 'pointer',
+  fontSize: 18,
+  color: 'white',
 }
-const mainStyles  = {
-    width: '800px',
-    height: '400px',
-    margin: '0 auto',
-    textAlign: 'center'
-}
+
+// Main Component
+const Main = ({ user, techs, greetPeople, handleTime }) => (
+  <main>
+    <div className='main-wrapper'>
+      <p>Prerequisite to get started react.js:</p>
+      <ul>
+        <TechList techs={techs} />
+      </ul>
+      <UserCard user={user} />
+      <Button text='Greet People' onClick={greetPeople} style={buttonStyles} />
+      <Button text='Show Time' onClick={handleTime} style={buttonStyles} />
+    </div>
+  </main>
+)
+
 const App = () => {
     const header = 'Front End Technologies'
     
