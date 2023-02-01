@@ -1,125 +1,76 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 // import myImg from "./images/img1.png";
-import elephant from './images/elephant.png'
-import gorilla from './images/gorilla.png'
-import home from './images/home.png'
-import ice from './images/ice_cream.png'
+import elephant from "./images/elephant.png";
+import gorilla from "./images/gorilla.png";
+import home from "./images/home.png";
+import ice from "./images/ice_cream.png";
 
+const cardStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "70%",
+    height: "200px",
+    margin: "20px auto",
+    background: "lightblue",
+    borderRadius: "10px",
+};
 
-
-const showDate = (time) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-  const month = months[time.getMonth()].slice(0, 3)
-  const year = time.getFullYear()
-  const date = time.getDate()
-  return ` ${month} ${date}, ${year}`
-}
-
-// Header Component
-const Header = ({
-  data: {
-    welcome,
-    title,
-    subtitle,
-    author: { firstName, lastName },
-    date,
-  },
-}) => {
-  return (
-    <header>
-      <div className='header-wrapper'>
-        <h1>{welcome}</h1>
-        <h2>{title}</h2>
-        <h3>{subtitle}</h3>
-        <p>
-          {firstName} {lastName}
-        </p>
-        <small>{showDate(date)}</small>
-      </div>
-    </header>
-  )
-}
-
-// TechList Component
-const TechList = ({ techs }) => {
-  const techList = techs.map((tech) => <li key={tech}>{tech}</li>)
-  return techList
-}
-
-// User Card Component
-const UserCard = ({ user: { firstName, lastName, image } }) => (
-  <div className='user-card'>
-    <img src={image} alt={firstName} />
-    <h2>
-      {firstName}
-      {lastName}
-    </h2>
-  </div>
-)
-
-// A button component
-
-const Button = ({ text, onClick, style }) => (
-  <button style={style} onClick={onClick}>
-    {text}
-  </button>
-)
-
-// CSS styles in JavaScript Object
+const inputStyles = {
+    width: "140px",
+    padding: "7px 5px ",
+    margin: "10px",
+    fontSize: "10px",
+    borderRadius: "5px",
+    border: "none",
+};
 const buttonStyles = {
-  backgroundColor: '#61dbfb',
-  padding: 10,
-  border: 'none',
-  borderRadius: 5,
-  margin: 3,
-  cursor: 'pointer',
-  fontSize: 18,
-  color: 'white',
-}
+    width: "150px",
+    padding: "5px 10px",
+    background: "orangered",
+    color: "white",
+    borderRadius: "5px",
+    border: "none",
+    cursor: 'pointer',
+};
 
-// Main Component
-const Main = ({ user, techs, greetPeople, handleTime }) => (
-  <main>
-    <div className='main-wrapper'>
-      <p>Prerequisite to get started react.js:</p>
-      <ul>
-        <TechList techs={techs} />
-      </ul>
-      <UserCard user={user} />
-      <Button text='Greet People' onClick={greetPeople} style={buttonStyles} />
-      <Button text='Show Time' onClick={handleTime} style={buttonStyles} />
-    </div>
-  </main>
+const Button = ({text, style}) => (
+  <button style={style}>{text}</button>
 )
+
+const SubscribeCard = ({ data: { title, subscribe,placeholderFN,placeholderLN,placeholderEmail } }) => {
+    return (
+        <div style={cardStyle}>
+            <h3>{subscribe.toUpperCase()}</h3>
+            <h4>{title}</h4>
+            <div>
+                <input style={inputStyles} placeholder={placeholderFN}></input>
+                <input style={inputStyles} placeholder={placeholderLN}></input>
+                <input style={inputStyles} placeholder={placeholderEmail}></input>
+            </div>
+            <Button text = 'Subscribe' style={buttonStyles}></Button>
+            {/* <button style={buttonStyles}>{subscribe}</button> */}
+        </div>
+    );
+};
 
 const App = () => {
-    const header = 'Front End Technologies'
+  const data = {
+    subscribe: "Subscribe",
+    title: "Sing up with your address to receive news and updates.",
+    placeholderFN: "First Name",
+    placeholderLN: "Last Name",
+    placeholderEmail: "Email",
     
-    const images = {elephant: elephant, gorilla: gorilla, home: home, ice: ice}
+};
     return (
         <div className="app">
-            <Main 
-                header={header}
-                images={images}
-            />
+            <SubscribeCard data={data} />
         </div>
-    )
-}
+    );
+};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
