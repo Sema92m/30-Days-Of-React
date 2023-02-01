@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-// import myImg from "./images/img1.png";
+import checked from "./images/checked.svg";
+import myImg from "./images/img1.png";
 import elephant from "./images/elephant.png";
 import gorilla from "./images/gorilla.png";
 import home from "./images/home.png";
@@ -76,51 +77,111 @@ import ice from "./images/ice_cream.png";
 
 // exercise 3.1 COLORS
 
-const paragraphStyles = {
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "25px",
-    color: "white",
-    fontWeight: "900",
-    letterSpacing: "2px",
-};
+// const paragraphStyles = {
+//     height: "100%",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     fontSize: "25px",
+//     color: "white",
+//     fontWeight: "900",
+//     letterSpacing: "2px",
+// };
 
-const blockColorStyles = {
-    width: "80%",
-    height: "70px",
-    margin: "5px auto",
+// const blockColorStyles = {
+//     width: "80%",
+//     height: "70px",
+//     margin: "5px auto",
+//     borderRadius: "5px",
+// };
+
+// const Block = ({ hexaColor }) => (
+//     <div style={{ ...blockColorStyles, background: hexaColor }}>
+//         <p style={paragraphStyles}>{hexaColor}</p>
+//     </div>
+// );
+// // exercise 3.1 COLORS
+
+// //Exercise 3.2 Skills card
+
+const MyData = ({ data: { firstName, lastName, exp, country } }) => (
+    <div>
+        <img className="my-foto" src={myImg} alt="myImg" />
+        <div className="my-name my-info">
+            <p>
+                {firstName} {lastName}{" "}
+                <img className="checked-svg" src={checked} alt="checked" />
+            </p>
+        </div>
+        <p>
+            {exp}, {country}
+        </p>
+    </div>
+);
+
+const techs = ["JS", "HTML", "CSS", "React", "Node", "Python", "Flask", "Git"];
+
+const skillsLiStyle = {
+    margin: "2px 5px",
+    padding: "5px",
+    background: "#61dbfb",
     borderRadius: "5px",
 };
 
-const Block = ({ hexaColor }) => (
-    <div style={{ ...blockColorStyles, background: hexaColor }}>
-        <p style={paragraphStyles}>{hexaColor}</p>
+const TechList = ({ techs }) => {
+    const techList = techs.map((tech) => (
+        <li style={skillsLiStyle} key={tech}>
+            {tech}
+        </li>
+    ));
+    return techList;
+};
+
+const MySkills = ({ data: { skillsTitle } }) => (
+    <div>
+        <h3 className="skills-header">{skillsTitle}</h3>
+        <ul className="skills-wrapper">
+            <TechList techs={techs} />
+        </ul>
     </div>
 );
-// exercise 3.1 COLORS
+
+const Footer = ({ data: { footerInfo } }) => (
+    <div className="footer3">
+        <p>{footerInfo}</p>
+    </div>
+);
+//Exercise 3.2-------------------------------------------
+
 const App = () => {
-    const hexaColor = () => {
-        let str = "0123456789abcdef";
-        let color = "";
-        for (let i = 0; i < 6; i++) {
-            let index = Math.floor(Math.random() * str.length);
-            color += str[index];
-        }
-        return "#" + color;
+    const techs = [
+        "JS",
+        "HTML",
+        "CSS",
+        "React",
+        "Node",
+        "Python",
+        "Flask",
+        "Git",
+    ];
+    const data = {
+        firstName: "Semion",
+        lastName: "Bryczkowski",
+        exp: "Senior Developer",
+        country: "Finland",
+        skillsTitle: "SKILLS",
+        footerInfo: "🕑 Joined on Aug 30, 2020",
     };
     return (
-        <div className="app">
-            <Block hexaColor={hexaColor()} />
-            <Block hexaColor={hexaColor()} />
-            <Block hexaColor={hexaColor()} />
-            <Block hexaColor={hexaColor()} />
-            <Block hexaColor={hexaColor()} />
-            <Block hexaColor={hexaColor()} />
+        <div className="container3">
+            <MyData data={data} />
+            <MySkills data={data} techs={techs} />
+            <Footer data={data} />
         </div>
     );
 };
+// Exercise 3.2 Skills card
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
