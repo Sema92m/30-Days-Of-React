@@ -1,20 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-const Numbers = ({ numbers }) => {
-    // const style1 = {
-    //     backgroundColor: numbers.key === 1 ? "lightgray" : "white",
-    // };
-    const numList = numbers.map((num) => (
-        <li
-            key={num}
-            className={num.key % 2 !== 0 ? "numbers-li" : "numbers-li-red"}
-        >
-            {num}
-        </li>
-    ));
+import "./index.css";
 
-    return numList;
+function isPrime(num) {
+    if (num <= 1) return false;
+    for (let i = 2; i < num; i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+const Numbers = ({ numbers }) => {
+    const numList = numbers.map((num, index) => {
+        let className;
+        if (isPrime(num)) {
+            className = "numbers-li-red";
+        } else if (index % 2 !== 0) {
+            className = "numbers-li-yellow";
+        } else {
+            className = "numbers-li";
+        }
+        return (
+            <li key={num} className={className}>
+                {num}
+            </li>
+        );
+    });
+    return <ul className="numbers-grid">{numList}</ul>
 };
+
 
 const App = () => {
     const numbers = [
@@ -32,10 +48,7 @@ const App = () => {
                 <h3>{data.title}</h3>
                 <h4 style={{ margin: "15px 0" }}>{data.subtitle}</h4>
             </div>
-
-            <ul className="numbers-grid">
-                <Numbers numbers={numbers} />
-            </ul>
+            <Numbers numbers={numbers} />
         </div>
     );
 };

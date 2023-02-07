@@ -1,13 +1,244 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    line-height: 1.5;
+    margin-top: 50px;
+    font-family: "Montserrat";
+    font-weight: 300;
+    color: black;
+    background-color: rgb(243, 243, 243);
+}
+
+.root {
+    min-height: 100%;
+    position: relative;
+}
+
+.header-wrapper,
+.main-wrapper,
+.footer-wrapper {
+    width: 85%;
+    margin: auto;
+}
+
+.header-wrapper,
+.main-wrapper {
+    padding: 10px;
+    margin: 2px auto;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+h2,
+h3 {
+    font-weight: 300;
+}
+
+header {
+    background-color: #61dbfb;
+    padding: 10px;
+}
+
+main {
+    padding: 10px;
+    padding-bottom: 60px;
+    /* Height of the footer */
+}
+
+ul {
+    margin-left: 15px;
+}
+
+ul li {
+    list-style: none;
+}
+
+footer {
+    /* position: absolute;
+  bottom: 0; */
+    width: 100%;
+    height: 60px;
+    /* Height of the footer */
+    background: #6cf;
+}
+
+.footer-wrapper {
+    font-weight: 400;
+    text-align: center;
+    line-height: 60px;
+}
+
+/* img {
+  width: 200px;
+} */
+
+.container {
+    width: 85%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px auto;
+
+    background-color: #85d3e6a9;
+    border-radius: 20px;
+}
+
+.header1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.h2 {
+    margin: 0 0 20px;
+}
+
+.input {
+    width: 150px;
+    height: 30px;
+    margin: 0 5px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.subscribeButton {
+    padding: 8px 10px;
+    width: 250px;
+    background: rgb(247, 131, 131);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* //ex3 */
+.container3 {
+    position: relative;
+    width: 700px;
+    height: 450px;
+    margin: 50px auto;
+    padding-left: 15px;
+    background: #fff;
+    border-radius: 15px;
+}
+
+.myImage {
+    padding-top: 20px;
+}
+
+.my-foto {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    object-fit: cover;
+    object-position: 55% -10%;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.my-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.my-info {
+    position: relative;
+}
+
+.checked-svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    position: absolute;
+    bottom: 4px;
+}
+
+.skills-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.skills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skills-li {
+    margin: 2px 5px;
+    padding: 5px;
+    background: #61dbfb;
+    border-radius: 5px;
+}
+
+.footer3 {
+    position: absolute;
+    bottom: 15px;
+}
+
+/* //day6 */
+.container6 {
+    min-width: 800px;
+    min-height: 500px;
+    margin: 20px;
+    background: rgb(219, 218, 221);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.numbers-grid {
+    height: 440px;
+    margin: 0;
+    padding: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template: repeat(4, 1fr) / repeat(8, 1fr);
+    gap: 3px;
+}
+
+.numbers-li, .numbers-li-red, .numbers-li-yellow {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+    background-color: #31bd7c;
+}
+
+.numbers-li-red {
+    background-color: rgb(202, 46, 46);
+}
+.numbers-li-yellow {
+    background-color: rgb(245, 199, 46);
 }
