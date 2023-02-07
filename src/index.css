@@ -221,7 +221,6 @@ footer {
     justify-content: center;
     align-items: center;
     grid-template: repeat(4, 1fr) / repeat(8, 1fr);
-    gap: 3px;
 }
 
 .numbers-li, .numbers-li-red, .numbers-li-yellow {
@@ -241,4 +240,18 @@ footer {
 }
 .numbers-li-yellow {
     background-color: rgb(245, 199, 46);
+}
+
+/* day 6 ex2.2 */
+
+.li-colors {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
 }
