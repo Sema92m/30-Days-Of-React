@@ -211,6 +211,7 @@ footer {
     background: rgb(219, 218, 221);
     border-radius: 10px;
     padding: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .numbers-grid {
@@ -254,4 +255,37 @@ footer {
     color: white;
     font-weight: bold;
     border-radius: 5px;
+}
+/* day 6 ex3 */
+.countries-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.li-countries {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4fr 15fr 4fr;
+    row-gap: 3px;
+    width: 100%;
+    height: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+.country-name, .country-population {
+    text-transform: uppercase;
+    font-weight: 900;
+}
+.country-population{
+    padding-left: 10px;
+}
+.country-orangeLine{
+    height: 100%;
+    background: orange;
+    border-radius: 3px;
 }
