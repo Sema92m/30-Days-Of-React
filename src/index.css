@@ -45,6 +45,10 @@ body {
     padding: 10px;
     margin: 2px auto;
 }
+main {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
 
 h1 {
     font-size: 30px;
@@ -224,7 +228,9 @@ footer {
     grid-template: repeat(4, 1fr) / repeat(8, 1fr);
 }
 
-.numbers-li, .numbers-li-red, .numbers-li-yellow {
+.numbers-li,
+.numbers-li-red,
+.numbers-li-yellow {
     height: 100%;
     width: 100%;
     display: flex;
@@ -277,14 +283,15 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
-.country-name, .country-population {
+.country-name,
+.country-population {
     text-transform: uppercase;
     font-weight: 900;
 }
-.country-population{
+.country-population {
     padding-left: 10px;
 }
-.country-orangeLine{
+.country-orangeLine {
     height: 100%;
     background: orange;
     border-radius: 3px;

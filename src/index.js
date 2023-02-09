@@ -36,7 +36,6 @@ const buttonStyles = {
 // class based component
 class Header extends React.Component {
     render() {
-        console.log(this.props.data);
         const {
             welcome,
             title,
@@ -61,15 +60,15 @@ class Header extends React.Component {
     }
 }
 
-const Count = ({ count, addOne, minusOne }) => (
-    <div>
-        <h1>{count} </h1>
-        <div>
-            <Button text="+1" onClick={addOne} style={buttonStyles} />
-            <Button text="-1" onClick={minusOne} style={buttonStyles} />
-        </div>
-    </div>
-);
+// const Count = ({ count, addOne, minusOne }) => (
+//     <div>
+//         <h1>{count} </h1>
+//         <div>
+//             <Button text="+1" onClick={addOne} style={buttonStyles} />
+//             <Button text="-1" onClick={minusOne} style={buttonStyles} />
+//         </div>
+//     </div>
+// );
 
 // TechList Component
 // class base component
@@ -91,12 +90,10 @@ class Main extends React.Component {
             greetPeople,
             handleTime,
             changeBackground,
-            count,
-            addOne,
-            minusOne,
+            styles,
         } = this.props;
         return (
-            <main>
+            <main style={styles}>
                 <div className="main-wrapper">
                     <p>Prerequisite to get started react.js:</p>
                     <ul>
@@ -118,7 +115,6 @@ class Main extends React.Component {
                         onClick={changeBackground}
                         style={buttonStyles}
                     />
-                    <Count count={count} addOne={addOne} minusOne={minusOne} />
                 </div>
             </main>
         );
@@ -129,8 +125,9 @@ class Main extends React.Component {
 // Class component
 class Footer extends React.Component {
     render() {
+			const {styles} = this.props;
         return (
-            <footer>
+            <footer style={styles}>
                 <div className="footer-wrapper">
                     <p>Copyright {this.props.date.getFullYear()}</p>
                 </div>
@@ -182,7 +179,28 @@ class App extends React.Component {
     greetPeople = () => {
         alert("Welcome to 30 Days Of React Challenge, 2020");
     };
-    changeBackground = () => {};
+    changeBackground = () => {
+        this.setState((state) => {
+            if (state.count === 0) {
+                return {
+                    styles: {
+                        backgroundColor: "#082128",
+                        color: "white",
+                    },
+                    count: state.count + 1,
+                };
+            } else if (state.count === 1) {
+                return {
+                    styles: {
+                        backgroundColor: "",
+                        color: "",
+                    },
+                    count: state.count - 1,
+                };
+            }
+        });
+        console.log(this.state.count, this.state.styles.backgroundColor);
+    };
     render() {
         const data = {
             welcome: "Welcome to 30 Days Of React",
@@ -195,13 +213,14 @@ class App extends React.Component {
             date: "Oct 7, 2020",
         };
         const techs = ["HTML", "CSS", "JavaScript"];
+        // const date = new Date()
         // copying the author from data object to user variable using spread operator
         const user = { ...data.author, image: myImg };
 
         return (
             <div className="app">
-                {this.state.backgroundColor}
-                <Header data={data} />
+                {/* {this.state.backgroundColor} */}
+                <Header data={data} styles={this.state.styles} />
                 <Main
                     user={user}
                     techs={techs}
@@ -211,8 +230,9 @@ class App extends React.Component {
                     addOne={this.addOne}
                     minusOne={this.minusOne}
                     count={this.state.count}
+                    styles={this.state.styles}
                 />
-                <Footer date={new Date()} />
+                <Footer date={new Date()} styles={this.state.styles} />
             </div>
         );
     }
