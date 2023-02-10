@@ -1,27 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import myImg from "./images/img1.png";
+// import myImg from "./images/img1.png";
+import countriesData from "./countriesDAY8";
 
-// User Card Component
-const UserCard = ({ user: { firstName, lastName, image } }) => (
-    <div className="user-card">
-        <img src={image} alt={firstName} />
-        <h2>
-            {firstName}
-            {lastName}
-        </h2>
-    </div>
-);
-
-// A button component
 const Button = ({ text, onClick, style }) => (
     <button style={style} onClick={onClick}>
         {text}
     </button>
 );
 
-// CSS styles in JavaScript Object
 const buttonStyles = {
     backgroundColor: "#61dbfb",
     padding: 10,
@@ -33,7 +21,6 @@ const buttonStyles = {
     color: "white",
 };
 
-// class based component
 class Header extends React.Component {
     render() {
         const {
@@ -60,59 +47,45 @@ class Header extends React.Component {
     }
 }
 
-// const Count = ({ count, addOne, minusOne }) => (
-//     <div>
-//         <h1>{count} </h1>
-//         <div>
-//             <Button text="+1" onClick={addOne} style={buttonStyles} />
-//             <Button text="-1" onClick={minusOne} style={buttonStyles} />
-//         </div>
-//     </div>
-// );
+const Country = ({
+    country: { name, capital, languages, population, flag },
+}) => {
+    return (
+        <div className="country-card">
+            <div className="country-flag">
+                <img className="flag8" src={flag} alt={name} />
+                <h2>{name}</h2>
+            </div>
+            <div className="country-data">
+                <p className="capital">Capital: {capital}</p>
+                <p className="language">Languages: {languages}</p>
+                <p className="population8">
+                    Population: {population.toLocaleString("en-US")}
+                </p>
+            </div>
+        </div>
+    );
+};
 
-// TechList Component
-// class base component
-class TechList extends React.Component {
-    render() {
-        const { techs } = this.props;
-        const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>);
-        return techsFormatted;
-    }
-}
+const Countries = ({ countries }) => {
+    let randomIndex = Math.floor(Math.random() * countries.length);
+    let randomCountryArr = countries[randomIndex];
+    const countryList = (
+        <Country country={randomCountryArr} key={randomIndex} />
+    );
+    return <div>{countryList}</div>;
+};
 
-// Main Component
-// Class Component
 class Main extends React.Component {
     render() {
-        const {
-            techs,
-            user,
-            greetPeople,
-            handleTime,
-            changeBackground,
-            styles,
-        } = this.props;
+        const { changeCountry, styles } = this.props;
         return (
-            <main style={styles}>
-                <div className="main-wrapper">
-                    <p>Prerequisite to get started react.js:</p>
-                    <ul>
-                        <TechList techs={techs} />
-                    </ul>
-                    <UserCard user={user} />
+            <main className="main8" style={styles}>
+                <div className="main-wrapper-day8">
+                    <Countries countries={countriesData} />
                     <Button
-                        text="Greet People"
-                        onClick={greetPeople}
-                        style={buttonStyles}
-                    />
-                    <Button
-                        text="Show Time"
-                        onClick={handleTime}
-                        style={buttonStyles}
-                    />
-                    <Button
-                        text="Change Background"
-                        onClick={changeBackground}
+                        text="Select Country"
+                        onClick={changeCountry}
                         style={buttonStyles}
                     />
                 </div>
@@ -121,11 +94,9 @@ class Main extends React.Component {
     }
 }
 
-// Footer Component
-// Class component
 class Footer extends React.Component {
     render() {
-			const {styles} = this.props;
+        const { styles } = this.props;
         return (
             <footer style={styles}>
                 <div className="footer-wrapper">
@@ -143,6 +114,7 @@ class App extends React.Component {
             backgroundColor: "",
             color: "",
         },
+        
     };
     showDate = (time) => {
         const months = [
@@ -165,20 +137,6 @@ class App extends React.Component {
         const date = time.getDate();
         return ` ${month} ${date}, ${year}`;
     };
-    addOne = () => {
-        this.setState({ count: this.state.count + 1 });
-    };
-
-    // method which subtract one to the state
-    minusOne = () => {
-        this.setState({ count: this.state.count - 1 });
-    };
-    handleTime = () => {
-        alert(this.showDate(new Date()));
-    };
-    greetPeople = () => {
-        alert("Welcome to 30 Days Of React Challenge, 2020");
-    };
     changeBackground = () => {
         this.setState((state) => {
             if (state.count === 0) {
@@ -199,7 +157,10 @@ class App extends React.Component {
                 };
             }
         });
-        console.log(this.state.count, this.state.styles.backgroundColor);
+    };
+    changeCountry = () => {
+        this.setState({ count: this.state.count });
+        // The setState method updates the state and re-renders the component with the new values.
     };
     render() {
         const data = {
@@ -212,31 +173,16 @@ class App extends React.Component {
             },
             date: "Oct 7, 2020",
         };
-        const techs = ["HTML", "CSS", "JavaScript"];
-        // const date = new Date()
-        // copying the author from data object to user variable using spread operator
-        const user = { ...data.author, image: myImg };
-
         return (
             <div className="app">
-                {/* {this.state.backgroundColor} */}
-                <Header data={data} styles={this.state.styles} />
-                <Main
-                    user={user}
-                    techs={techs}
-                    handleTime={this.handleTime}
-                    greetPeople={this.greetPeople}
-                    changeBackground={this.changeBackground}
-                    addOne={this.addOne}
-                    minusOne={this.minusOne}
-                    count={this.state.count}
-                    styles={this.state.styles}
-                />
-                <Footer date={new Date()} styles={this.state.styles} />
+                <Header data={data} />
+                <Main changeCountry={this.changeCountry} />
+                <Footer date={new Date()} />
             </div>
         );
     }
 }
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>

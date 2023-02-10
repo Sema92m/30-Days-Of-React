@@ -296,3 +296,34 @@ footer {
     background: orange;
     border-radius: 3px;
 }
+
+/* day8 ex 2 */
+.main8{
+  padding-bottom: 15px;
+}
+.main-wrapper-day8 {
+    width: 500px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+.country-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 20px;
+    min-height: 335px;
+    margin-bottom: 30px;
+    border: 2px solid rgb(232, 231, 231);
+}
+.flag8 {
+    display: block;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    margin-top: 15px;
+    background: no-repeat center;
+}
+.population8 {
+    margin-bottom: 10px;
+}
