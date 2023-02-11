@@ -298,8 +298,8 @@ footer {
 }
 
 /* day8 ex 2 */
-.main8{
-  padding-bottom: 15px;
+.main8 {
+    padding-bottom: 15px;
 }
 .main-wrapper-day8 {
     width: 500px;
@@ -314,7 +314,7 @@ footer {
     margin: 20px;
     min-height: 335px;
     margin-bottom: 30px;
-    border: 2px solid rgb(232, 231, 231);
+    border: 2px solid #f48d6bc5;
 }
 .flag8 {
     display: block;
@@ -326,4 +326,20 @@ footer {
 }
 .population8 {
     margin-bottom: 10px;
+}
+
+/* //day9 */
+
+.header-wrapper-day9 {
+    width: 100%;
+    height: 130px;
+    margin: auto;
+    text-align: center;
+}
+.main-wrapper-day9 {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
 }

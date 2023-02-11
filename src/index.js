@@ -1,93 +1,51 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-// import myImg from "./images/img1.png";
-import countriesData from "./countriesDAY8";
-
-const Button = ({ text, onClick, style }) => (
-    <button style={style} onClick={onClick}>
-        {text}
-    </button>
-);
-
-const buttonStyles = {
-    backgroundColor: "#61dbfb",
-    padding: 10,
-    border: "none",
-    borderRadius: 5,
-    margin: 3,
-    cursor: "pointer",
-    fontSize: 18,
-    color: "white",
-};
 
 class Header extends React.Component {
     render() {
-        const {
-            welcome,
-            title,
-            subtitle,
-            author: { firstName, lastName },
-            date,
-        } = this.props.data;
-
+        const { title, subtitle, date } = this.props.data;
         return (
-            <header style={this.props.styles}>
-                <div className="header-wrapper">
-                    <h1>{welcome}</h1>
-                    <h2>{title}</h2>
-                    <h3>{subtitle}</h3>
-                    <p>
-                        {firstName} {lastName}
-                    </p>
-                    <small>{date}</small>
+            <header className="header-wrapper-day9">
+                <div>
+                    <h1>{title}</h1>
+                    <h2>{subtitle}</h2>
+                    <p>{date}</p>
                 </div>
             </header>
         );
     }
 }
 
-const Country = ({
-    country: { name, capital, languages, population, flag },
-}) => {
-    return (
-        <div className="country-card">
-            <div className="country-flag">
-                <img className="flag8" src={flag} alt={name} />
-                <h2>{name}</h2>
-            </div>
-            <div className="country-data">
-                <p className="capital">Capital: {capital}</p>
-                <p className="language">Languages: {languages}</p>
-                <p className="population8">
-                    Population: {population.toLocaleString("en-US")}
-                </p>
-            </div>
-        </div>
-    );
-};
-
-const Countries = ({ countries }) => {
-    let randomIndex = Math.floor(Math.random() * countries.length);
-    let randomCountryArr = countries[randomIndex];
-    const countryList = (
-        <Country country={randomCountryArr} key={randomIndex} />
-    );
-    return <div>{countryList}</div>;
+const Button = ({ text, onClick, style }) => (
+    <button style={style} onClick={onClick}>
+        {text}
+    </button>
+);
+const buttonStyles = {
+    backgroundColor: "#61dbfb",
+    padding: 10,
+    border: "none",
+    borderRadius: 5,
+    margin: "3px auto",
+    cursor: "pointer",
+    fontSize: 22,
+    color: "white",
 };
 
 class Main extends React.Component {
     render() {
-        const { changeCountry, styles } = this.props;
+        const { handleSeason } = this.props;
+        const { seasonName,seasonFontColor } = this.props.data;
         return (
-            <main className="main8" style={styles}>
-                <div className="main-wrapper-day8">
-                    <Countries countries={countriesData} />
+            <main style={{backgroundColor: seasonFontColor}} className="main-wrapper-day9">
+                <div style={{ marginTop: "200px" }}>
                     <Button
-                        text="Select Country"
-                        onClick={changeCountry}
+                        text="change season"
+                        onClick={handleSeason}
                         style={buttonStyles}
                     />
+                    <h2>{seasonName}</h2>
                 </div>
             </main>
         );
@@ -96,9 +54,8 @@ class Main extends React.Component {
 
 class Footer extends React.Component {
     render() {
-        const { styles } = this.props;
         return (
-            <footer style={styles}>
+            <footer>
                 <div className="footer-wrapper">
                     <p>Copyright {this.props.date.getFullYear()}</p>
                 </div>
@@ -109,74 +66,52 @@ class Footer extends React.Component {
 
 class App extends React.Component {
     state = {
-        count: 0,
-        styles: {
-            backgroundColor: "",
-            color: "",
-        },
-        
+        season: 7,
+        seasonColor: ''
     };
-    showDate = (time) => {
-        const months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-
-        const month = months[time.getMonth()].slice(0, 3);
-        const year = time.getFullYear();
-        const date = time.getDate();
-        return ` ${month} ${date}, ${year}`;
-    };
-    changeBackground = () => {
-        this.setState((state) => {
-            if (state.count === 0) {
-                return {
-                    styles: {
-                        backgroundColor: "#082128",
-                        color: "white",
-                    },
-                    count: state.count + 1,
-                };
-            } else if (state.count === 1) {
-                return {
-                    styles: {
-                        backgroundColor: "",
-                        color: "",
-                    },
-                    count: state.count - 1,
-                };
-            }
+    handleSeason = () => {
+        this.setState({
+            season: Math.floor(Math.random() * 11),
+            
         });
+        console.log(this.state.season);
     };
-    changeCountry = () => {
-        this.setState({ count: this.state.count });
-        // The setState method updates the state and re-renders the component with the new values.
-    };
+
     render() {
+        let seasons;
+        let seasonColor = this.state.seasonColor;
+
+        if (this.state.season <= 3) {
+            seasons = "winter";
+            seasonColor = "gray";
+        }
+        if (this.state.season > 3 && this.state.season <= 6) {
+            seasons = "spring";
+            seasonColor = "green";
+        }
+        if (this.state.season > 6 && this.state.season <= 9) {
+            seasons = "summer";
+            seasonColor = "#cdf46bc5";
+        }
+        if (this.state.season > 9 && this.state.season <= 11) {
+          seasons = "fall";
+          seasonColor = "#f48d6bc5";
+        }
         const data = {
-            welcome: "Welcome to 30 Days Of React",
-            title: "Getting Started React",
-            subtitle: "JavaScript Library",
-            author: {
-                firstName: "Asabeneh",
-                lastName: "Yetayeh",
-            },
-            date: "Oct 7, 2020",
-        };
+          title: "Change background",
+          subtitle: "Click buttons!",
+          date: "11-Feb-2023",
+          seasonName: seasons,
+          seasonFontColor: seasonColor,
+      };
         return (
             <div className="app">
                 <Header data={data} />
-                <Main changeCountry={this.changeCountry} />
+                <Main
+                    data={data}
+                    style={{ color: { seasonColor } }}
+                    handleSeason={this.handleSeason}
+                />
                 <Footer date={new Date()} />
             </div>
         );
