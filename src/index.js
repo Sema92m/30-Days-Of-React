@@ -36,16 +36,19 @@ const buttonStyles = {
 class Main extends React.Component {
     render() {
         const { handleSeason } = this.props;
-        const { seasonName,seasonFontColor } = this.props.data;
+        const { dayTimeName, seasonFontColor } = this.props.data;
         return (
-            <main style={{backgroundColor: seasonFontColor}} className="main-wrapper-day9">
+            <main
+                style={{ backgroundColor: seasonFontColor }}
+                className="main-wrapper-day9"
+            >
                 <div style={{ marginTop: "200px" }}>
                     <Button
                         text="change season"
                         onClick={handleSeason}
                         style={buttonStyles}
                     />
-                    <h2>{seasonName}</h2>
+                    <h2>{dayTimeName}</h2>
                 </div>
             </main>
         );
@@ -63,47 +66,64 @@ class Footer extends React.Component {
         );
     }
 }
-
 class App extends React.Component {
     state = {
-        season: 7,
-        seasonColor: ''
+        hour: '',
+        seasonColor: "",
     };
+    // showDate = () => {
+    //   const hours = (new Date()).getHours();
+    //   this.setState({
+    //     hour: `${hours}`
+    //   }) 
+    //   return hours
+    // }
     handleSeason = () => {
         this.setState({
-            season: Math.floor(Math.random() * 11),
-            
+            hour: Math.floor(Math.random() * 25),
         });
-        console.log(this.state.season);
+        console.log(this.state.hour);
     };
 
     render() {
-        let seasons;
+        let dayTime;
         let seasonColor = this.state.seasonColor;
 
-        if (this.state.season <= 3) {
-            seasons = "winter";
+        if (this.state.hour >= 6 && this.state.hour < 12) {
+            dayTime = "morning";
             seasonColor = "gray";
         }
-        if (this.state.season > 3 && this.state.season <= 6) {
-            seasons = "spring";
+        if (this.state.hour === 12) {
+            dayTime = "noon";
+            seasonColor = "red";
+        }
+        if (this.state.hour > 12 && this.state.hour <= 18) {
+            dayTime = "afternoon";
             seasonColor = "green";
         }
-        if (this.state.season > 6 && this.state.season <= 9) {
-            seasons = "summer";
+        if (this.state.hour > 18 && this.state.hour < 21) {
+            dayTime = "evening";
             seasonColor = "#cdf46bc5";
         }
-        if (this.state.season > 9 && this.state.season <= 11) {
-          seasons = "fall";
-          seasonColor = "#f48d6bc5";
+        if (
+            (this.state.hour >= 21 && this.state.hour < 24) ||
+            (this.state.hour >= 0 && this.state.hour < 6)
+        ) {
+            dayTime = "night";
+            seasonColor = "#f48d6bc5";
         }
+        if (this.state.hour === 0 || this.state.hour === 24) {
+            dayTime = "midnight";
+            seasonColor = "#f49d9bc5";
+        }
+
         const data = {
-          title: "Change background",
-          subtitle: "Click buttons!",
-          date: "11-Feb-2023",
-          seasonName: seasons,
-          seasonFontColor: seasonColor,
-      };
+            title: "Change background",
+            subtitle: "Click buttons!",
+            date: "11-Feb-2023",
+            dayTimeName: dayTime,
+            seasonFontColor: seasonColor,
+        };
         return (
             <div className="app">
                 <Header data={data} />
