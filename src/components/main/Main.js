@@ -36,6 +36,7 @@ class Main extends React.Component {
             handleLogin,
             message,
             darkMode,
+            
         } = this.props;
         const status = loggedIn ? <Welcome /> : <Login />;
         return (
