@@ -35,12 +35,13 @@ class Main extends React.Component {
             loggedIn,
             handleLogin,
             message,
-            darkMode,
-            
+            changeBackground,
+            styles,
         } = this.props;
         const status = loggedIn ? <Welcome /> : <Login />;
+      
         return (
-            <main>
+            <main style={styles}>
                 <div className="main-wrapper">
                     <p>Prerequisite to get started react.js:</p>
                     <ul>
@@ -79,7 +80,7 @@ class Main extends React.Component {
                         <Button
                             text="Dark mode"
                             style={buttonStyles}
-                            onClick={darkMode}
+                            onClick={changeBackground}
                         />
                         <br />
                         {status}

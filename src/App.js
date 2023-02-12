@@ -5,10 +5,14 @@ import Footer from "./components/footer/Footer";
 
 class App extends React.Component {
     state = {
+        count: 0,
         loggedIn: false,
         techs: ["HTML", "CSS", "JS"],
         message: "Click show time or Greet people to change me",
-        darkMode: "",
+        styles: {
+            backgroundColor: "",
+            color: "",
+        },
     };
     handleLogin = () => {
         this.setState({
@@ -40,10 +44,27 @@ class App extends React.Component {
         let message = this.showDate(new Date());
         this.setState({ message });
     };
-    darkMode = () => {
-        let darkMode = "red";
-        this.setState({ darkMode });
-        console.log(this.state.darkMode);
+    changeBackground = () => {
+        this.setState((state) => {
+            if (state.count === 0) {
+                return {
+                    styles: {
+                        backgroundColor: "#082128",
+                        color: "white",
+                    },
+                    count: state.count + 1,
+                };
+            } else if (state.count === 1) {
+                return {
+                    styles: {
+                        backgroundColor: "",
+                        color: "",
+                    },
+                    count: state.count - 1,
+                };
+            }
+        });
+        console.log(this.state.count, this.state.styles.backgroundColor);
     };
     greetPeople = () => {
         let message = "Welcome to 30 Days Of React Challenge, 2020";
@@ -65,7 +86,7 @@ class App extends React.Component {
 
         return (
             <div className="app">
-                <Header data={data} />
+                <Header data={data} styles={this.state.styles} />
                 <Main
                     techs={techs}
                     handleTime={this.handleTime}
@@ -73,10 +94,10 @@ class App extends React.Component {
                     loggedIn={this.state.loggedIn}
                     handleLogin={this.handleLogin}
                     message={this.state.message}
-                    darkMode={this.darkMode}
-                    style={{ backgroundColor: this.state.darkMode }}
+                    changeBackground={this.changeBackground}
+                    styles={this.state.styles}
                 />
-                <Footer date={new Date()} />
+                <Footer date={new Date()} styles={this.state.styles} />
             </div>
         );
     }

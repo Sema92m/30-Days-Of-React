@@ -8,10 +8,13 @@ class Header extends React.Component {
       subtitle,
       author: { firstName, lastName },
       date,
+      
     } = this.props.data
-
+    const {
+      styles,
+    } = this.props
     return (
-      <header>
+      <header style={styles}>
         <div className='header-wrapper'>
           <h1>{welcome}</h1>
           <h2>{title}</h2>
