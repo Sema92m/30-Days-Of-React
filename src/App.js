@@ -1,103 +1,114 @@
 import React from "react";
-import Header from "./components/header/Header";
-import Main from "./components/main/Main";
-import Footer from "./components/footer/Footer";
 
 class App extends React.Component {
     state = {
-        count: 0,
-        loggedIn: false,
-        techs: ["HTML", "CSS", "JS"],
-        message: "Click show time or Greet people to change me",
-        styles: {
-            backgroundColor: "",
-            color: "",
-        },
+        firstName: "",
+        message: "",
+        key: "",
     };
-    handleLogin = () => {
+    handleClick = (e) => {
+        // e gives an event object
+        // check the value of e using console.log(e)
         this.setState({
-            loggedIn: !this.state.loggedIn,
+            message: "Welcome to the world of events",
         });
     };
-    showDate = (time) => {
-        const months = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
-        ];
-
-        const month = months[time.getMonth()].slice(0, 3);
-        const year = time.getFullYear();
-        const date = time.getDate();
-        return `${month} ${date}, ${year}`;
+    // triggered whenever the mouse moves
+    handleMouseMove = (e) => {
+        this.setState({ message: "mouse is moving" });
     };
-    handleTime = () => {
-        let message = this.showDate(new Date());
-        this.setState({ message });
-    };
-    changeBackground = () => {
-        this.setState((state) => {
-            if (state.count === 0) {
-                return {
-                    styles: {
-                        backgroundColor: "#082128",
-                        color: "white",
-                    },
-                    count: state.count + 1,
-                };
-            } else if (state.count === 1) {
-                return {
-                    styles: {
-                        backgroundColor: "",
-                        color: "",
-                    },
-                    count: state.count - 1,
-                };
-            }
+    // to get value when an input field changes a value
+    handleChange = (e) => {
+        this.setState({
+            firstName: e.target.value,
+            message: e.target.value,
         });
-        console.log(this.state.count, this.state.styles.backgroundColor);
-    };
-    greetPeople = () => {
-        let message = "Welcome to 30 Days Of React Challenge, 2020";
-        this.setState({ message });
     };
 
+    // to get keyboard key code when an input field is pressed
+    // it works with input and textarea
+    handleKeyPress = (e) => {
+        this.setState({
+            message:
+                `${e.target.value} has been pressed and the keycode is` +
+                e.charCode,
+        });
+    };
+    // Blurring happens when a mouse leave an input field
+    handleBlur = (e) => {
+        this.setState({ message: "Input field has been blurred" });
+    };
+    // This event triggers during a text copy
+    handleCopy = (e) => {
+        this.setState({
+            message:
+                "Using 30 Days Of React for commercial purpose is not allowed",
+        });
+    };
+    handleSubmit = (e) => {
+      console.log(123);
+        e.prevent.default();
+        
+        this.setState({
+            message: "Form submitted",
+        });
+    };
+    handleMouseMove1 =(e)=>{
+      this.setState({
+        message: `x: ${e.clientX} y: ${e.clientY}`
+      })
+    }
     render() {
-        const data = {
-            welcome: "30 Days Of React",
-            title: "Getting Started React",
-            subtitle: "JavaScript Library",
-            author: {
-                firstName: "Asabeneh",
-                lastName: "Yetayeh",
-            },
-            date: "Oct 9, 2020",
-        };
-        const techs = ["HTML", "CSS", "JavaScript"];
-
         return (
-            <div className="app">
-                <Header data={data} styles={this.state.styles} />
-                <Main
-                    techs={techs}
-                    handleTime={this.handleTime}
-                    greetPeople={this.greetPeople}
-                    loggedIn={this.state.loggedIn}
-                    handleLogin={this.handleLogin}
-                    message={this.state.message}
-                    changeBackground={this.changeBackground}
-                    styles={this.state.styles}
-                />
-                <Footer date={new Date()} styles={this.state.styles} />
+            <div onMouseMove={this.handleMouseMove1}>
+                <h1>Welcome to the World of Events</h1>
+
+                <button onClick={this.handleClick}>Click Me</button>
+                <button onMouseMove={this.handleMouseMove}>
+                    Move mouse on me
+                </button>
+                <p onCopy={this.handleCopy}>
+                    Check copy right permission by copying this text
+                </p>
+
+                <p>{this.state.message}</p>
+                <label htmlFor=""> Test for onKeyPress Event: </label>
+                <input type="text" onKeyDown={this.handleKeyPress} />
+                <br />
+
+                <label htmlFor=""> Test for onBlur Event: </label>
+                <input type="text" onBlur={this.handleBlur} />
+
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label htmlFor="firstName">First Name: </label>
+                        <input
+                            onChange={this.handleChange}
+                            name="firstName"
+                            value={this.state.value}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="onInput">onInput </label>
+                        <input
+                            onInput={this.handleChange}
+                            name="onInput"
+                            value={this.state.value}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="onBlur">onBlur </label>
+                        <input
+                            onInput={this.handleChange}
+                            name="onBlur"
+                            value={this.state.value}
+                        />
+                    </div>
+                </form>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" />
+                    <button type="submit">Submit</button>
+                </form>
             </div>
         );
     }
