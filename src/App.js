@@ -1,10 +1,33 @@
 import React from "react";
+const stylesP = {
+    display: "block",
+    position: "absolute",
+    width: "250px",
+    padding: "20px",
+    backgroundColor: "blue",
+    fontWeight: "900",
+    fontSize: "20px",
+};
+const stylesDiv = {
+    display: "block",
+    position: "relative",
+    width: "1000px",
+    height: "1000px",
+    border: "1px solid black",
+    backgroundColor: "lightgray",
+    margin: "auto",
+};
 
 class App extends React.Component {
     state = {
+        count: 0,
         firstName: "",
         message: "",
         key: "",
+    };
+    style = {
+        left: 385,
+        top: 475,
     };
     handleClick = (e) => {
         // e gives an event object
@@ -46,69 +69,37 @@ class App extends React.Component {
         });
     };
     handleSubmit = (e) => {
-      console.log(123);
         e.prevent.default();
-        
+
         this.setState({
             message: "Form submitted",
         });
     };
-    handleMouseMove1 =(e)=>{
-      this.setState({
-        message: `x: ${e.clientX} y: ${e.clientY}`
-      })
-    }
+    handleMouseMove1 = (e) => {
+        this.setState({
+            message: `x: ${e.clientX} y: ${e.clientY}`,
+        });
+    };
+    handleMouseEnter = (e) => {};
+    randomCoordinates = () => {
+        let randomNumX = Math.floor(Math.random() * 750);
+        let randomNumY = Math.floor(Math.random() * 930);
+        this.style = {
+            left: randomNumX,
+            top: randomNumY,
+        };
+
+        this.setState({
+            count: this.state.count + 1,
+        });
+        console.log(this.style.left, this.style.top, this.state.count);
+    };
     render() {
         return (
-            <div onMouseMove={this.handleMouseMove1}>
-                <h1>Welcome to the World of Events</h1>
-
-                <button onClick={this.handleClick}>Click Me</button>
-                <button onMouseMove={this.handleMouseMove}>
-                    Move mouse on me
-                </button>
-                <p onCopy={this.handleCopy}>
-                    Check copy right permission by copying this text
+            <div style={stylesDiv}>
+                <p className="stylesP" style={this.style} onMouseEnter={this.randomCoordinates}>
+                    30 DAYS OF REACT
                 </p>
-
-                <p>{this.state.message}</p>
-                <label htmlFor=""> Test for onKeyPress Event: </label>
-                <input type="text" onKeyDown={this.handleKeyPress} />
-                <br />
-
-                <label htmlFor=""> Test for onBlur Event: </label>
-                <input type="text" onBlur={this.handleBlur} />
-
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="firstName">First Name: </label>
-                        <input
-                            onChange={this.handleChange}
-                            name="firstName"
-                            value={this.state.value}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="onInput">onInput </label>
-                        <input
-                            onInput={this.handleChange}
-                            name="onInput"
-                            value={this.state.value}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="onBlur">onBlur </label>
-                        <input
-                            onInput={this.handleChange}
-                            name="onBlur"
-                            value={this.state.value}
-                        />
-                    </div>
-                </form>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" />
-                    <button type="submit">Submit</button>
-                </form>
             </div>
         );
     }

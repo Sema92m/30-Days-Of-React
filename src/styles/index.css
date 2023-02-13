@@ -343,3 +343,14 @@ footer {
     padding: 10px;
     text-align: center;
 }
+
+.stylesP {
+    display: block;
+    position: absolute;
+    width: 250px;
+    height: 70px;
+    padding: 20px;
+    background-color: blue;
+    font-weight: 900;
+    font-size: 20px;
+}
