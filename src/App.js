@@ -1,4 +1,5 @@
 import React from "react";
+import validator from "validator";
 
 const options = [
     {
@@ -23,14 +24,14 @@ const options = [
     },
 ];
 
-// mapping the options to list(array) of JSX options
-
 const selectOptions = options.map(({ value, label }) => (
-    <option value={value}> {label}</option>
+    <option key={value} value={value}>
+        {" "}
+        {label}
+    </option>
 ));
 
 class App extends React.Component {
-    // declaring state
     state = {
         firstName: "",
         lastName: "",
@@ -43,6 +44,7 @@ class App extends React.Component {
         gender: "",
         file: "",
         bio: "",
+        isValid: true,
         skills: {
             html: false,
             css: false,
@@ -51,20 +53,11 @@ class App extends React.Component {
         touched: {
             firstName: false,
             lastName: false,
+            email: false,
         },
     };
     handleChange = (e) => {
-        /*
-     we can get the name and value like: e.target.name, e.target.value
-    Wwe can also destructure name and value from e.target
-    const name = e.target.name
-    const value = e.target.value
-    */
         const { name, value, type, checked } = e.target;
-        /*
-    [variablename] we can make a value stored in a certain variable could be a key for an object, in this case a key for the state
-    */
-
         if (type === "checkbox") {
             this.setState({
                 skills: { ...this.state.skills, [name]: checked },
@@ -76,31 +69,46 @@ class App extends React.Component {
         }
     };
     handleBlur = (e) => {
-        const { name, value } = e.target;
+        const { name } = e.target;
         this.setState({ touched: { ...this.state.touched, [name]: true } });
     };
     validate = () => {
-        // Object to collect error feedback and to display on the form
         const errors = {
             firstName: "",
+            lastName: "",
+            email: "",
         };
-
         if (
             (this.state.touched.firstName && this.state.firstName.length < 3) ||
             (this.state.touched.firstName && this.state.firstName.length > 12)
         ) {
             errors.firstName = "First name must be between 2 and 12";
         }
+        if (
+            (this.state.touched.lastName && this.state.lastName.length < 3) ||
+            (this.state.touched.lastName && this.state.lastName.length > 12)
+        ) {
+            errors.lastName = "Last Name must be between 2 and 12";
+        }
+        if (
+            (this.state.touched.email && this.state.email.length < 3) ||
+            (this.state.touched.email && this.state.email.length > 12)
+        ) {
+            errors.email = "First name must be between 2 and 12";
+        }
         return errors;
     };
-    handleSubmit = (e) => {
-        /*
-      e.preventDefault()
-      stops the default behavior of form element 
-      specifically refreshing of page
-      */
-        e.preventDefault();
+    
+    handleEmailChange = (e) => {
+        const emailValue = e.target.value;
+        this.setState({
+            email: emailValue,
+            isValid: validator.isEmail(emailValue),
+        });
+    };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
         const {
             firstName,
             lastName,
@@ -141,14 +149,12 @@ class App extends React.Component {
      the is the place where we connect backend api
       to send the data to the database
       */
-        console.log(data);
     };
 
     render() {
-        // accessing the state value by destrutcturing the state
-        // the noValidate attribute on the form is to stop the HTML5 built-in validation
 
-        const { firstName } = this.validate();
+        const { firstName, lastName } = this.validate();
+        const { email, isValid } = this.state;
         return (
             <div className="App">
                 <h3>Add Student</h3>
@@ -174,21 +180,26 @@ class App extends React.Component {
                                 name="lastName"
                                 value={this.state.lastName}
                                 onChange={this.handleChange}
+                                onBlur={this.handleBlur}
                                 placeholder="Last Name"
-                            />
+                            />{" "}
+                            <br />
+                            <p>{lastName}</p>
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email </label>
                             <input
                                 type="email"
                                 name="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
+                                value={email}
+                                onChange={this.handleEmailChange}
+                                // onBlur={this.handleEmailChange}
                                 placeholder="Email"
-                            />
+                            />{" "}
+                            <br />
+                            {isValid ? <p></p> : <p>Email is invalid</p>}
                         </div>
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="tel">Telephone </label>
                         <input
@@ -288,7 +299,6 @@ class App extends React.Component {
                                 id="html"
                                 name="html"
                                 onChange={this.handleChange}
-                                
                             />
                             <label htmlFor="html">HTML</label>
                         </div>
