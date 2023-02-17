@@ -1,32 +1,16 @@
 import React from 'react'
 // Header component
-class Header extends React.Component {
-  render() {
-    const {
-      welcome,
-      title,
-      subtitle,
-      author: { firstName, lastName },
-      date,
-      
-    } = this.props.data
-    const {
-      styles,
-    } = this.props
-    return (
-      <header style={styles}>
-        <div className='header-wrapper'>
-          <h1>{welcome}</h1>
-          <h2>{title}</h2>
-          <h3>{subtitle}</h3>
-          <p>
-            {firstName} {lastName}
-          </p>
-          <small>{date}</small>
-        </div>
-      </header>
-    )
-  }
-}
+import '../../styles/header.scss'
+const Header = (
+   <header>
+          <div className='header-wrapper'>
+            <h1>30 Days Of React</h1>
+            <h2>Getting Started React</h2>
+            <h3>JavaScript Library</h3>
+            <p>Instructor: Asabeneh Yetayeh</p>
+            <small>Oct 15, 2020</small>
+          </div>
+        </header>
+)
 
 export default Header
