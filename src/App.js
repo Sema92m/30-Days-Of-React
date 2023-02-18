@@ -1,48 +1,50 @@
 import React from "react";
-const Button = ({ onClick, text, style }) => {
+
+const Input = ({ onChange, text, style }) => {
     return (
-        <button onClick={onClick} style={style}>
-            {text}
-        </button>
+        <div>
+            <label htmlFor={text}>{text}</label>
+            <input
+                name={text}
+                onChange={onChange}
+                style={style}
+                placeholder={text}
+            />
+        </div>
     );
 };
 
-const buttonWithStyles = (CompParam, name = "default") => {
+const inputWithStyles = (CompParam, name = "default") => {
     const colors = [
-        {
-            name: "default",
-            backgroundColor: "#e7e7e7",
-            color: "#000000",
-        },
         {
             name: "react",
             backgroundColor: "#61dbfb",
-            color: "#ffffff",
+            color: "white",
         },
         {
             name: "success",
             backgroundColor: "#4CAF50",
-            color: "#ffffff",
+            color: "#1f7fff",
         },
         {
             name: "info",
             backgroundColor: "#2196F3",
-            color: "#ffffff",
+            color: "black",
         },
         {
             name: "warning",
             backgroundColor: "#ff9800",
-            color: "#ffffff",
+            color: "brown",
         },
         {
             name: "danger",
             backgroundColor: "#f44336",
-            color: "#ffffff",
+            color: "#f7f444",
         },
     ];
-    const { backgroundColor, color } = colors.find((el) => el.name === name);
+    const { backgroundColor, color } = colors.find((c) => c.name === name);
 
-    const buttonStyles = {
+    const inputStyles = {
         backgroundColor,
         padding: "10px 45px",
         border: "none",
@@ -53,52 +55,47 @@ const buttonWithStyles = (CompParam, name = "default") => {
         color,
     };
     return (props) => {
-        return <CompParam {...props} style={buttonStyles} />;
+        return <CompParam {...props} style={inputStyles} />;
     };
 };
 
-const NewButton = buttonWithStyles(Button);
-const ReactButton = buttonWithStyles(Button, "react");
-const InfoButton = buttonWithStyles(Button, "info");
-const SuccessButton = buttonWithStyles(Button, "success");
-const WarningButton = buttonWithStyles(Button, "warning");
-const DangerButton = buttonWithStyles(Button, "danger");
+const SucInput = inputWithStyles(Input, "success");
+const ReactInput = inputWithStyles(Input, "react");
+const InfoInput = inputWithStyles(Input, "info");
+const WarningInput = inputWithStyles(Input, "warning");
+const DangerInput = inputWithStyles(Input, "danger");
 
 class App extends React.Component {
+    state = {
+        text: 1,
+    };
     render() {
         return (
-            <div className="App">
-                <Button
-                    text="No Style"
-                    onClick={() => alert("I am not styled yet")}
-                />
-                <NewButton
-                    text="Styled Button"
-                    onClick={() => alert("I am the default style")}
-                />
-                <ReactButton
-                    text="React"
-                    onClick={() => console.log('123')}
-                />
-                <InfoButton
-                    text="Info"
-                    onClick={() => alert("I am styled with info color")}
-                />
-                <SuccessButton
-                    text="Success"
-                    onClick={() => alert("I am successful")}
-                />
-                <WarningButton
-                    text="Warning"
-                    onClick={() => alert("I warn you many times")}
-                />
-                <DangerButton
-                    text="Danger"
-                    onClick={() => alert("Oh no, you can not restore it")}
-                />
+            <div>
+                <div className="App">
+                    <SucInput
+                        text={this.state.text}
+                        onChange={() => console.log(1)}
+                    />
+                    <ReactInput
+                        text={this.state.text + 1}
+                        onChange={() => console.log(1)}
+                    />
+                    <InfoInput
+                        text={this.state.text + 2}
+                        onChange={() => console.log(1)}
+                    />
+                    <WarningInput
+                        text={this.state.text + 3}
+                        onChange={() => console.log(1)}
+                    />
+                    <DangerInput
+                        text={this.state.text + 4}
+                        onChange={() => console.log(1)}
+                    />
+                </div>
             </div>
         );
     }
 }
-
 export default App;
