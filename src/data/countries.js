@@ -2054,5 +2054,40 @@ const countriesData = [
     },
 ];
 
+//code for create the same arr
+// function createCountriesArr() {
+//     const c = "array from api";
+//     const a = [];
+//     let obj = {};
+//     let str = "";
+//     for (let i = 0; i < c.length; i++) {
+//         if (!c[i].capital || c[i].capital === undefined) {
+//             c[i].capital = "No capital";
+//         }
+//         if (!c[i].languages || c[i].languages === undefined) {
+//             c[i].languages = "No information";
+//         }
+//         if (!c[i].currency || c[i].currency === undefined) {
+//             c[i].currency = "No information";
+//         }
+//         for (let currencyCode in c[i].currencies) {
+//             const currency = c[i].currencies[currencyCode];
+//             if (currency.name) {
+//                 str = currency.name;
+//             }
+//         }
+//         obj = {
+//             name: c[i].name.common,
+//             capital: c[i].capital[0],
+//             population: c[i].population,
+//             flag: c[i].flags.svg,
+//             languages: Object.values(c[i].languages),
+//             currency: str,
+//         };
+//         a.push(obj);
+//     }
+//     console.log(a);
+//     return a;
+// }
 
 export default countriesData;
